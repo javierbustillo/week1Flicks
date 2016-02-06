@@ -13,6 +13,7 @@ import MBProgressHUD
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
     var movies: [NSDictionary]?
+    var endpoint: String!
     
    
     @IBOutlet weak var tableView: UITableView!
@@ -34,7 +35,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
         let session = NSURLSession(
             configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
@@ -111,8 +112,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
-        
-        
+    
+        cell.selectionStyle = .None
         print("row \(indexPath.row)")
         return cell
         
@@ -127,7 +128,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     func refreshControlAction(refreshControl: UIRefreshControl) {
         
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
         
         let session = NSURLSession(
@@ -150,7 +151,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         func loadDataFromNetwork(){
            
             let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-            let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+            let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
             let request = NSURLRequest(URL: url!)
             
             let session = NSURLSession(
@@ -174,11 +175,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             
             
             }
-        
-           
-            
-        
-
+    
     
 
 
